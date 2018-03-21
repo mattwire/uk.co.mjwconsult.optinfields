@@ -147,6 +147,9 @@ function optinfields_civicrm_custom($op, $groupID, $entityID, &$params) {
       $endOfName = strpos($field['column_name'], '_');
       if ($endOfName !== FALSE) {
         $privacyOption = substr($field['column_name'], 0, $endOfName);
+        if ($field['value'] == '') {
+          continue;
+        }
         $newValue = empty($field['value']) ? '1' : '0';
         if ($privacyOption == 'phone') {
           // Special case to handle sms (as we're treating it as the same "phone" permission
