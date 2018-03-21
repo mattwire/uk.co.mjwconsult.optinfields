@@ -58,7 +58,7 @@
       <custom_group_name>Communication_Preferences</custom_group_name>
     </CustomField>
     <CustomField>
-      <name>post</name>
+      <name>mail</name>
       <label>Post</label>
       <data_type>Boolean</data_type>
       <html_type>Radio</html_type>
@@ -71,7 +71,7 @@
       <text_length>255</text_length>
       <note_columns>60</note_columns>
       <note_rows>4</note_rows>
-      <column_name>post_42</column_name>
+      <column_name>mail_42</column_name>
       <in_selector>0</in_selector>
       <custom_group_name>Communication_Preferences</custom_group_name>
     </CustomField>
