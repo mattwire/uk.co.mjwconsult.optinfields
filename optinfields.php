@@ -135,15 +135,28 @@ function optinfields_civicrm_entityTypes(&$entityTypes) {
 }
 
 function optinfields_civicrm_custom($op, $groupID, $entityID, &$params) {
-  $custom_group = civicrm_api3('CustomGroup', 'getsingle', array('id' => $groupID));
-  if ($custom_group['extends'] !== 'Contact') {
+  $customGroup = civicrm_api3('CustomGroup', 'getsingle', array('id' => $groupID));
+  if (($customGroup['name'] !== 'Communication_Preferences') || ($customGroup['extends'] !== 'Contact')) {
     return;
   }
+  // Get a list of custom fields for the group
+  $customFields = civicrm_api3('CustomField', 'get', array('custom_group_id' => $groupID));
+  // Get a list of field column names and set value to "is_active" status
+  // We use this to check the SMS/Phone is a separate permission or not
+  foreach ($customFields['values'] as $customField) {
+    $fieldsByColumnName[$customField['column_name']] = $customField['is_active'];
+  }
+  // Get full details for the contact record
   $contact = civicrm_api3('Contact', 'getsingle', array('id' => $entityID));
 
   $changed = FALSE;
   foreach($params as $field) {
     if (!empty($field['custom_field_id'])) {
+      if (!in_array($field['column_name'], array_keys($fieldsByColumnName))) {
+        // Only interested in our optinfields.
+        return;
+      }
+      // Column names are in format phone_XX - we map the first part to the respective privacy option on the contact record
       $endOfName = strpos($field['column_name'], '_');
       if ($endOfName !== FALSE) {
         $privacyOption = substr($field['column_name'], 0, $endOfName);
@@ -152,12 +165,16 @@ function optinfields_civicrm_custom($op, $groupID, $entityID, &$params) {
         }
         $newValue = empty($field['value']) ? '1' : '0';
         if ($privacyOption == 'phone') {
-          // Special case to handle sms (as we're treating it as the same "phone" permission
-          if ($contact['do_not_sms'] !== $newValue) {
-            $contact['do_not_sms'] = $newValue;
-            $changed = TRUE;
+          // If the sms custom field is disabled, we set the sms privacy option to mirror the phone privacy option.
+          if (!$fieldsByColumnName['sms_43']) {
+            // Special case to handle sms (as we're treating it as the same "phone" permission
+            if ($contact['do_not_sms'] !== $newValue) {
+              $contact['do_not_sms'] = $newValue;
+              $changed = TRUE;
+            }
           }
         }
+        // Only update the contact record if the value has actually changed.
         if ($contact['do_not_'.$privacyOption] !== $newValue) {
           $contact['do_not_' . $privacyOption] = $newValue;
           $changed = TRUE;

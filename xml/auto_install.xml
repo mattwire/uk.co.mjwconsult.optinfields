@@ -15,7 +15,6 @@
       <table_name>civicrm_value_communication_15</table_name>
       <is_multiple>0</is_multiple>
       <collapse_adv_display>0</collapse_adv_display>
-      <created_date>2018-03-21 12:55:43</created_date>
       <is_reserved>0</is_reserved>
       <is_public>1</is_public>
     </CustomGroup>
@@ -23,7 +22,7 @@
   <CustomFields>
     <CustomField>
       <name>phone</name>
-      <label>Phone/Text</label>
+      <label>Phone</label>
       <data_type>Boolean</data_type>
       <html_type>Radio</html_type>
       <is_required>0</is_required>
@@ -33,9 +32,23 @@
       <is_active>1</is_active>
       <is_view>0</is_view>
       <text_length>255</text_length>
-      <note_columns>60</note_columns>
-      <note_rows>4</note_rows>
       <column_name>phone_40</column_name>
+      <in_selector>0</in_selector>
+      <custom_group_name>Communication_Preferences</custom_group_name>
+    </CustomField>
+    <CustomField>
+      <name>sms</name>
+      <label>Sms</label>
+      <data_type>Boolean</data_type>
+      <html_type>Radio</html_type>
+      <is_required>0</is_required>
+      <is_searchable>1</is_searchable>
+      <is_search_range>0</is_search_range>
+      <weight>1</weight>
+      <is_active>1</is_active>
+      <is_view>0</is_view>
+      <text_length>255</text_length>
+      <column_name>sms_43</column_name>
       <in_selector>0</in_selector>
       <custom_group_name>Communication_Preferences</custom_group_name>
     </CustomField>
@@ -51,8 +64,6 @@
       <is_active>1</is_active>
       <is_view>0</is_view>
       <text_length>255</text_length>
-      <note_columns>60</note_columns>
-      <note_rows>4</note_rows>
       <column_name>email_41</column_name>
       <in_selector>0</in_selector>
       <custom_group_name>Communication_Preferences</custom_group_name>
@@ -69,8 +80,6 @@
       <is_active>1</is_active>
       <is_view>0</is_view>
       <text_length>255</text_length>
-      <note_columns>60</note_columns>
-      <note_rows>4</note_rows>
       <column_name>mail_42</column_name>
       <in_selector>0</in_selector>
       <custom_group_name>Communication_Preferences</custom_group_name>

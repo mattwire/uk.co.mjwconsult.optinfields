@@ -2,15 +2,19 @@
 
 ![Screenshot](/images/contact_summary_communication_prefs.png)
 
-This extension adds a set of 3 "Yes/No" fields to the contact summary which can be used in public facing forms to 
-allow contacts to explicitly opt-in/opt-out of different communication methods (Phone/Text, Email, Post).
+This extension adds a set of 4 "Yes/No" fields to the contact summary which can be used in public facing forms to 
+allow contacts to explicitly opt-in/opt-out of different communication methods (Phone, Email, Post, SMS).
 
 Exposing the "Do not Email"/"Do not Post" fields directly is not desirable by many organisations and does not make 
-it easy for them to comply with GDPR requirements.
+it easy for them to comply with GDPR requirements as they need to offer "Opt-in" fields rather than "Opt-out".
 
 The appropriate "Do not" fields are automatically updated whenever the new fields are changed (but not the other way round).
 
 The extension is licensed under [AGPL-3.0](LICENSE.txt).
+
+## Configuration
+### Phone/SMS - separate or linked option?
+If you disable the "SMS" custom field via the custom fields UI, the "Phone" Yes/No field will automatically update the "Do not SMS" field as well.
 
 ## Requirements
 
