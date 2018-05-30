@@ -18,8 +18,9 @@ If you disable the "SMS" custom field via the custom fields UI, the "Phone" Yes/
 
 ## Requirements
 
-* PHP v5.4+
+* PHP v5.6+
 * CiviCRM 4.7.31 (untested with earlier versions)
+* Tested on Drupal and Wordpress
 
 ## Installation (Web UI)
 

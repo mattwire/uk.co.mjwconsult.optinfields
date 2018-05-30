@@ -10,6 +10,10 @@ use CRM_Optinfields_ExtensionUtil as E;
  */
 function optinfields_civicrm_config(&$config) {
   _optinfields_civix_civicrm_config($config);
+
+  // For Wordpress we need to register hook_civicrm_custom for it to fire from frontend forms (eg. Caldera CiviCRM integration)
+  if (!function_exists('civi_wp') || !function_exists('add_filter')) return;
+  add_filter('civicrm_custom', 'optinfields_civicrm_custom', 10, 4);
 }
 
 /**
@@ -163,7 +167,14 @@ function optinfields_civicrm_custom($op, $groupID, $entityID, &$params) {
         if ($field['value'] == '') {
           continue;
         }
-        $newValue = empty($field['value']) ? '1' : '0';
+        // Empty or No = Do Not XX
+        if (empty($field['value']) || (strtolower($field['value']) === 'no')) {
+          $newValue = 1;
+        }
+        else {
+          $newValue = 0;
+        }
+
         if ($privacyOption == 'phone') {
           // If the sms custom field is disabled, we set the sms privacy option to mirror the phone privacy option.
           if (!$fieldsByColumnName['sms_43']) {
