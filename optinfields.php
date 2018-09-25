@@ -177,7 +177,7 @@ function optinfields_civicrm_custom($op, $groupID, $entityID, &$params) {
 
         if ($privacyOption == 'phone') {
           // If the sms custom field is disabled, we set the sms privacy option to mirror the phone privacy option.
-          if (!$fieldsByColumnName['sms_43']) {
+          if (!in_array('sms_43', array_keys($fieldsByColumnName))) {
             // Special case to handle sms (as we're treating it as the same "phone" permission
             if ($contact['do_not_sms'] !== $newValue) {
               $contact['do_not_sms'] = $newValue;
