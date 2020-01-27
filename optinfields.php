@@ -186,7 +186,7 @@ function optinfields_civicrm_custom($op, $groupID, $entityID, &$params) {
           }
         }
         // Only update the contact record if the value has actually changed.
-        if ($contact['do_not_'.$privacyOption] !== $newValue) {
+        if (isset($contact['do_not_'.$privacyOption]) && $contact['do_not_'.$privacyOption] !== $newValue) {
           $contact['do_not_' . $privacyOption] = $newValue;
           $changed = TRUE;
         }
