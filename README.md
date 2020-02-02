@@ -1,3 +1,5 @@
+# Moved to https://lab.civicrm.org/extensions/optinfields
+
 # uk.co.mjwconsult.optinfields
 
 ![Screenshot](/images/contact_summary_communication_prefs.png)
